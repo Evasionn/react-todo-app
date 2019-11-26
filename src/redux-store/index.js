@@ -1,17 +1,44 @@
-import { createStore } from 'redux';
+import {createStore} from 'redux';
 
 const initialState = {
-    todos: []
-}
+    todos: [
+        {
+            id: 0,
+            task: 'test item 01',
+            done: false
+        },
+        {
+            id: 1,
+            task: 'test item 02',
+            done: true
+        }
+    ]
+};
 
 const reducer = (state = initialState, action) => {
-    switch(action.type) {
-        // fill with actions......
+    const oldState = state.todos.slice();
+    let newState;
+    switch (action.type) {
+        case 'CHANGE_TASK_STATUS':
+             newState = oldState.map((item) => {
+                if (item.id === action.task_id) {
+                    return {
+                        ...item,
+                        done: !item.done
+                    }
+                }
+                return item;
+            });
+            return Object.assign({}, state, {todos: newState});
 
-        default: 
-        return state;
+        case 'CLEAR_COMPLETED':
+            newState = oldState.filter((item) => !item.done);
+            return Object.assign({}, state, {todos: newState});
+
+        default:
+            return state;
     }
-}
+};
 
 const store = createStore(reducer);
 export default store;
