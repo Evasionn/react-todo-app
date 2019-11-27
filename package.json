@@ -36,5 +36,11 @@
     "plugins": [
       "react-hot-loader/babel"
     ]
+  },
+  "devDependencies": {
+    "react-test-renderer": "^16.12.0",
+    "redux-mock-store": "^1.5.3"
+  },
+  "jest": {
   }
 }
