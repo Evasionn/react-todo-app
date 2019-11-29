@@ -19,6 +19,9 @@ const reducer = (state = initialState, action) => {
     const oldState = state.todos.slice();
     let newState;
     switch (action.type) {
+        case 'ADD_TASK':
+            const newTask = {id: state.todos.length, task: action.new_task, done: false};
+            return {...state, todos: [...state.todos, newTask]};
         case 'CHANGE_TASK_STATUS':
              newState = oldState.map((item) => {
                 if (item.id === action.task_id) {
